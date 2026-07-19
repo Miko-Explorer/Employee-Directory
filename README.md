@@ -68,7 +68,7 @@ Employee Directory/
 │  ├─ ERD_employee_db.pdf          # ERD diagram (PDF)
 │  ├─ employee_directory.sql       # DB + 10 tables DDL
 │  ├─ employee_directory_reports.sql # 26 reporting views
-│  └─ sample_employee_entries.sql  # 10 sample rows per table
+│  └─ sample_employee_entries.sql  # 50 sample rows per table
 ├─ audit_logs.py                   # Audit trail recording and retrieval
 ├─ database.py                     # DB connection + run_query() / run_many()
 ├─ email_verifications.py          # Email verification token workflow
@@ -139,7 +139,7 @@ Employee Directory/
      ```bash
      mysql -u your_user -p employee_db < "Database & ERD/sample_employee_entries.sql"
      ```
-     Populates 10 sample rows per table for testing.
+      Populates 50 sample rows per table for testing.
 
   3. **Create reporting views:**
      ```bash
@@ -403,4 +403,4 @@ Include your chosen license here (e.g., MIT).
 
 ## Contact
 
-Maintained by **Miko-Explorer** — open an issue on [GitHub](https://github.com/Miko-Explorer/Employee-Directory).
+Maintained by **Miko-Explorer** — open an issue on [GitHub]([https://github.com/Miko-Explorer/Employee-Directory](https://github.com/Miko-Explorer/Employee-Directory)]).
