@@ -1,236 +1,519 @@
 -- ============================================================
--- SAMPLE DATA (10 ENTRIES PER TABLE)
--- Designed for testing Aggregations, Filters & Combined Analysis
--- All constraints (FKs, UNIQUE, CHECK) are respected.
--- Run this AFTER your schema creation script.
--- ============================================================
-
--- ============================================================
--- 1. ROLES (10 entries)
+-- 1. INSERT ROLES (50 entries, IDs 1-50)
 -- ============================================================
 INSERT INTO roles (role_id, role_name, description, created_at, updated_at) VALUES
-(1, 'Admin', 'Full system access with all permissions', '2025-01-15 09:00:00', '2026-06-28 10:00:00'),
-(2, 'Manager', 'Can approve requests and manage team members', '2025-02-20 10:00:00', '2026-06-28 10:00:00'),
-(3, 'Employee', 'Standard user access', '2025-03-10 11:30:00', '2026-06-28 10:00:00'),
-(4, 'HR Specialist', 'Manages employee records and onboarding', '2025-04-05 08:15:00', '2026-06-28 10:00:00'),
-(5, 'Payroll Officer', 'Handles salary and compensation data', '2025-05-12 13:45:00', '2026-06-28 10:00:00'),
-(6, 'IT Support', 'Manages system access and technical issues', '2025-06-18 09:30:00', '2026-06-28 10:00:00'),
-(7, 'Department Head', 'Oversees departmental operations', '2025-07-22 14:00:00', '2026-06-28 10:00:00'),
-(8, 'Recruiter', 'Manages hiring and candidate pipelines', '2025-08-14 10:30:00', '2026-06-28 10:00:00'),
-(9, 'Compliance Officer', 'Ensures policy adherence and audits', '2025-09-05 08:00:00', '2026-06-28 10:00:00'),
-(10, 'Intern', 'Limited access for training purposes', '2025-10-10 11:00:00', '2026-06-28 10:00:00');
+(1, 'Admin', 'Full system access with all permissions', '2025-01-15 09:00:00', NOW()),
+(2, 'Manager', 'Can approve requests and manage team members', '2025-02-20 10:00:00', NOW()),
+(3, 'Employee', 'Standard user access', '2025-03-10 11:30:00', NOW()),
+(4, 'HR Specialist', 'Manages employee records and onboarding', '2025-04-05 08:15:00', NOW()),
+(5, 'Payroll Officer', 'Handles salary and compensation data', '2025-05-12 13:45:00', NOW()),
+(6, 'IT Support', 'Manages system access and technical issues', '2025-06-18 09:30:00', NOW()),
+(7, 'Department Head', 'Oversees departmental operations', '2025-07-22 14:00:00', NOW()),
+(8, 'Recruiter', 'Manages hiring and candidate pipelines', '2025-08-14 10:30:00', NOW()),
+(9, 'Compliance Officer', 'Ensures policy adherence and audits', '2025-09-05 08:00:00', NOW()),
+(10, 'Intern', 'Limited access for training purposes', '2025-10-10 11:00:00', NOW()),
+(11, 'Team Lead', 'Leads a specific project team', '2025-11-01 09:45:00', NOW()),
+(12, 'Product Manager', 'Manages product development lifecycle', '2025-12-12 14:30:00', NOW()),
+(13, 'QA Tester', 'Quality assurance and testing', '2026-01-15 08:00:00', NOW()),
+(14, 'DevOps Engineer', 'Manages infrastructure and deployments', '2026-02-20 13:15:00', NOW()),
+(15, 'Security Analyst', 'Monitors system security', '2026-03-05 10:00:00', NOW()),
+(16, 'Data Analyst', 'Data reporting and analytics', '2026-04-18 09:30:00', NOW()),
+(17, 'Sales Representative', 'Sales and client management', '2026-05-01 11:45:00', NOW()),
+(18, 'Marketing Specialist', 'Marketing and communications', '2026-05-15 14:00:00', NOW()),
+(19, 'Operations Manager', 'Manages day-to-day operations', '2026-06-01 08:15:00', NOW()),
+(20, 'Technical Writer', 'Documentation and training materials', '2026-06-10 12:00:00', NOW()),
+(21, 'Business Analyst', 'Analyzes business processes', '2026-06-15 09:00:00', NOW()),
+(22, 'Project Coordinator', 'Coordinates project timelines', '2026-06-20 10:00:00', NOW()),
+(23, 'Software Engineer', 'Develops software applications', '2026-06-25 11:30:00', NOW()),
+(24, 'UX Designer', 'Designs user experiences', '2026-06-28 08:15:00', NOW()),
+(25, 'Network Admin', 'Manages network infrastructure', '2026-07-01 13:45:00', NOW()),
+(26, 'DB Admin', 'Manages database systems', '2026-07-05 09:30:00', NOW()),
+(27, 'Sys Admin', 'Manages system infrastructure', '2026-07-10 14:00:00', NOW()),
+(28, 'Help Desk', 'Provides technical support', '2026-07-15 10:30:00', NOW()),
+(29, 'Trainer', 'Coordinates training programs', '2026-07-20 08:00:00', NOW()),
+(30, 'Benefits Admin', 'Manages employee benefits', '2026-07-25 11:00:00', NOW()),
+(31, 'Financial Analyst', 'Analyzes financial data', '2026-07-30 09:45:00', NOW()),
+(32, 'Accountant', 'Manages accounting records', '2026-08-01 14:30:00', NOW()),
+(33, 'Internal Auditor', 'Conducts internal audits', '2026-08-05 08:00:00', NOW()),
+(34, 'Legal Counsel', 'Provides legal advice', '2026-08-10 13:15:00', NOW()),
+(35, 'Risk Manager', 'Manages organizational risk', '2026-08-15 10:00:00', NOW()),
+(36, 'Procurement', 'Manages vendor relationships', '2026-08-20 09:30:00', NOW()),
+(37, 'Supply Chain', 'Manages supply chain operations', '2026-08-25 11:45:00', NOW()),
+(38, 'Logistics', 'Coordinates logistics and distribution', '2026-08-30 14:00:00', NOW()),
+(39, 'Warehouse', 'Manages warehouse operations', '2026-09-01 08:15:00', NOW()),
+(40, 'Inventory', 'Analyzes inventory trends', '2026-09-05 12:00:00', NOW()),
+(41, 'Customer Service', 'Manages customer service', '2026-09-10 09:00:00', NOW()),
+(42, 'Support Analyst', 'Provides customer analysis', '2026-09-15 10:00:00', NOW()),
+(43, 'QA Manager', 'Manages quality assurance', '2026-09-20 11:30:00', NOW()),
+(44, 'Product Engineer', 'Develops and improves products', '2026-09-25 08:15:00', NOW()),
+(45, 'Research Scientist', 'Conducts R&D', '2026-09-30 13:45:00', NOW()),
+(46, 'Clinical Researcher', 'Conducts clinical studies', '2026-10-01 09:30:00', NOW()),
+(47, 'Biostatistician', 'Analyzes biological data', '2026-10-05 14:00:00', NOW()),
+(48, 'Medical Writer', 'Writes scientific documentation', '2026-10-10 10:30:00', NOW()),
+(49, 'Regulatory Affairs', 'Manages regulatory compliance', '2026-10-15 08:00:00', NOW()),
+(50, 'Pharmacovigilance', 'Monitors drug safety', '2026-10-20 11:00:00', NOW());
 
 -- ============================================================
--- 2. PERMISSIONS (10 entries)
+-- 2. INSERT PERMISSIONS (50 entries, IDs 1-50)
 -- ============================================================
 INSERT INTO permissions (permission_id, permission_name, resource, action, description, created_at) VALUES
-(1, 'view_users', 'users', 'view', 'Can view user profiles', '2026-01-15 09:00:00'),
-(2, 'create_users', 'users', 'create', 'Can create new user accounts', '2026-01-15 09:00:00'),
-(3, 'edit_users', 'users', 'edit', 'Can edit user details', '2026-01-15 09:00:00'),
-(4, 'delete_users', 'users', 'delete', 'Can delete user accounts', '2026-01-15 09:00:00'),
-(5, 'view_roles', 'roles', 'view', 'Can view role definitions', '2026-01-15 09:00:00'),
-(6, 'edit_roles', 'roles', 'edit', 'Can modify role definitions', '2026-01-15 09:00:00'),
-(7, 'view_reports', 'reports', 'view', 'Can view system reports', '2026-01-15 09:00:00'),
-(8, 'export_reports', 'reports', 'export', 'Can export reports', '2026-01-15 09:00:00'),
-(9, 'view_settings', 'settings', 'view', 'Can view system settings', '2026-01-15 09:00:00'),
-(10, 'edit_settings', 'settings', 'edit', 'Can modify system settings', '2026-01-15 09:00:00');
+(1, 'view_users', 'users', 'view', 'View user profiles', NOW()),
+(2, 'create_users', 'users', 'create', 'Create new user accounts', NOW()),
+(3, 'edit_users', 'users', 'edit', 'Edit user details', NOW()),
+(4, 'delete_users', 'users', 'delete', 'Delete user accounts', NOW()),
+(5, 'view_roles', 'roles', 'view', 'View role definitions', NOW()),
+(6, 'edit_roles', 'roles', 'edit', 'Modify role definitions', NOW()),
+(7, 'delete_roles', 'roles', 'delete', 'Delete role definitions', NOW()),
+(8, 'view_permissions', 'permissions', 'view', 'View permission definitions', NOW()),
+(9, 'edit_permissions', 'permissions', 'edit', 'Modify permissions', NOW()),
+(10, 'delete_permissions', 'permissions', 'delete', 'Delete permissions', NOW()),
+(11, 'view_reports', 'reports', 'view', 'View system reports', NOW()),
+(12, 'export_reports', 'reports', 'export', 'Export reports', NOW()),
+(13, 'view_settings', 'settings', 'view', 'View system settings', NOW()),
+(14, 'edit_settings', 'settings', 'edit', 'Modify system settings', NOW()),
+(15, 'view_audit', 'audit', 'view', 'View audit logs', NOW()),
+(16, 'delete_audit', 'audit', 'delete', 'Delete audit logs', NOW()),
+(17, 'view_sessions', 'sessions', 'view', 'View active sessions', NOW()),
+(18, 'terminate_sessions', 'sessions', 'delete', 'Terminate user sessions', NOW()),
+(19, 'view_payroll', 'payroll', 'view', 'View payroll data', NOW()),
+(20, 'edit_payroll', 'payroll', 'edit', 'Edit payroll data', NOW()),
+(21, 'view_attendance', 'attendance', 'view', 'View attendance records', NOW()),
+(22, 'edit_attendance', 'attendance', 'edit', 'Edit attendance records', NOW()),
+(23, 'view_training', 'training', 'view', 'View training materials', NOW()),
+(24, 'edit_training', 'training', 'edit', 'Edit training materials', NOW()),
+(25, 'view_department', 'department', 'view', 'View department info', NOW()),
+(26, 'edit_department', 'department', 'edit', 'Edit department info', NOW()),
+(27, 'view_team', 'team', 'view', 'View team info', NOW()),
+(28, 'edit_team', 'team', 'edit', 'Edit team info', NOW()),
+(29, 'view_project', 'project', 'view', 'View project info', NOW()),
+(30, 'edit_project', 'project', 'edit', 'Edit project info', NOW()),
+(31, 'view_budget', 'budget', 'view', 'View budget info', NOW()),
+(32, 'edit_budget', 'budget', 'edit', 'Edit budget info', NOW()),
+(33, 'view_contract', 'contract', 'view', 'View contract info', NOW()),
+(34, 'edit_contract', 'contract', 'edit', 'Edit contract info', NOW()),
+(35, 'view_vendor', 'vendor', 'view', 'View vendor info', NOW()),
+(36, 'edit_vendor', 'vendor', 'edit', 'Edit vendor info', NOW()),
+(37, 'view_client', 'client', 'view', 'View client info', NOW()),
+(38, 'edit_client', 'client', 'edit', 'Edit client info', NOW()),
+(39, 'view_inventory', 'inventory', 'view', 'View inventory info', NOW()),
+(40, 'edit_inventory', 'inventory', 'edit', 'Edit inventory info', NOW()),
+(41, 'view_supplier', 'supplier', 'view', 'View supplier info', NOW()),
+(42, 'edit_supplier', 'supplier', 'edit', 'Edit supplier info', NOW()),
+(43, 'view_customer', 'customer', 'view', 'View customer info', NOW()),
+(44, 'edit_customer', 'customer', 'edit', 'Edit customer info', NOW()),
+(45, 'view_order', 'order', 'view', 'View order info', NOW()),
+(46, 'edit_order', 'order', 'edit', 'Edit order info', NOW()),
+(47, 'view_invoice', 'invoice', 'view', 'View invoice info', NOW()),
+(48, 'edit_invoice', 'invoice', 'edit', 'Edit invoice info', NOW()),
+(49, 'view_payment', 'payment', 'view', 'View payment info', NOW()),
+(50, 'edit_payment', 'payment', 'edit', 'Edit payment info', NOW());
 
 -- ============================================================
--- 3. USERS (10 entries) – Includes Active, Suspended, Locked, Soft-Deleted
+-- 3. INSERT USERS (50 entries, IDs 1-50)
+--    Status: 45 Active, 3 Suspended, 1 Locked, 4 Soft-deleted
 -- ============================================================
 INSERT INTO users (
     user_id, user_name, email, password_hash, salt, first_name, last_name, 
     phone_number, profile_picture_url, status, last_login_ip, last_login_at, 
     created_at, updated_at, deleted_at
 ) VALUES
-(1, 'jdoe', 'john.doe@company.com', 'hash_12345', 'salt_abc123', 'John', 'Doe', 
- '09171234567', 'https://cdn.company.com/avatars/jdoe.jpg', 'active', '192.168.1.100', '2026-06-25 08:30:00', 
- '2025-01-15 09:00:00', '2026-06-28 10:00:00', NULL),
-
-(2, 'jsmith', 'jane.smith@company.com', 'hash_67890', 'salt_def456', 'Jane', 'Smith', 
- '09171234568', 'https://cdn.company.com/avatars/jsmith.jpg', 'active', '192.168.1.101', '2026-06-25 09:15:00', 
- '2025-02-20 10:00:00', '2026-06-28 10:00:00', NULL),
-
-(3, 'mjohnson', 'mike.johnson@company.com', 'hash_11111', 'salt_ghi789', 'Mike', 'Johnson', 
- '09171234569', 'https://cdn.company.com/avatars/mjohnson.jpg', 'active', '192.168.1.102', '2026-06-24 16:45:00', 
- '2025-03-10 11:30:00', '2026-06-28 10:00:00', NULL),
-
-(4, 'swilliams', 'sarah.williams@company.com', 'hash_22222', 'salt_jkl012', 'Sarah', 'Williams', 
- '09171234570', 'https://cdn.company.com/avatars/swilliams.jpg', 'active', '192.168.1.103', '2026-06-24 14:20:00', 
- '2025-04-05 08:15:00', '2026-06-28 10:00:00', NULL),
-
-(5, 'rbrown', 'robert.brown@company.com', 'hash_33333', 'salt_mno345', 'Robert', 'Brown', 
- '09171234571', 'https://cdn.company.com/avatars/rbrown.jpg', 'suspended', '192.168.1.104', '2026-06-23 11:30:00', 
- '2025-05-12 13:45:00', '2026-06-28 10:00:00', NULL),
-
-(6, 'ldavis', 'linda.davis@company.com', 'hash_44444', 'salt_pqr678', 'Linda', 'Davis', 
- '09171234572', 'https://cdn.company.com/avatars/ldavis.jpg', 'active', '192.168.1.105', '2026-06-25 10:00:00', 
- '2025-06-18 09:30:00', '2026-06-28 10:00:00', NULL),
-
-(7, 'pwilson', 'paul.wilson@company.com', 'hash_55555', 'salt_stu901', 'Paul', 'Wilson', 
- '09171234573', 'https://cdn.company.com/avatars/pwilson.jpg', 'active', '192.168.1.106', '2026-06-22 08:45:00', 
- '2025-07-22 14:00:00', '2026-06-28 10:00:00', NULL),
-
-(8, 'mmartinez', 'maria.martinez@company.com', 'hash_66666', 'salt_vwx234', 'Maria', 'Martinez', 
- '09171234574', 'https://cdn.company.com/avatars/mmartinez.jpg', 'active', '192.168.1.107', '2026-06-25 11:20:00', 
- '2025-08-14 10:30:00', '2026-06-28 10:00:00', NULL),
-
-(9, 'jtaylor', 'james.taylor@company.com', 'hash_77777', 'salt_yza567', 'James', 'Taylor', 
- '09171234575', 'https://cdn.company.com/avatars/jtaylor.jpg', 'suspended', '192.168.1.108', '2026-06-21 09:00:00', 
- '2025-09-05 08:00:00', '2026-06-28 10:00:00', '2026-06-28 10:00:00'),
-
-(10, 'awilson', 'amy.wilson@company.com', 'hash_88888', 'salt_bcd890', 'Amy', 'Wilson', 
- '09171234576', 'https://cdn.company.com/avatars/awilson.jpg', 'locked', '192.168.1.109', '2026-06-24 15:30:00', 
- '2025-10-10 11:00:00', '2026-06-28 10:00:00', '2026-06-28 10:00:00');
+(1, 'jdoe', 'john.doe@company.com', 'hash_12345', 'salt_abc123', 'John', 'Doe', '09171234567', 'https://cdn.company.com/avatars/jdoe.jpg', 'active', '192.168.1.100', '2026-06-25 08:30:00', '2025-01-15 09:00:00', NOW(), NULL),
+(2, 'jsmith', 'jane.smith@company.com', 'hash_67890', 'salt_def456', 'Jane', 'Smith', '09171234568', 'https://cdn.company.com/avatars/jsmith.jpg', 'active', '192.168.1.101', '2026-06-25 09:15:00', '2025-02-20 10:00:00', NOW(), NULL),
+(3, 'mjohnson', 'mike.johnson@company.com', 'hash_11111', 'salt_ghi789', 'Mike', 'Johnson', '09171234569', 'https://cdn.company.com/avatars/mjohnson.jpg', 'active', '192.168.1.102', '2026-06-24 16:45:00', '2025-03-10 11:30:00', NOW(), NULL),
+(4, 'swilliams', 'sarah.williams@company.com', 'hash_22222', 'salt_jkl012', 'Sarah', 'Williams', '09171234570', 'https://cdn.company.com/avatars/swilliams.jpg', 'active', '192.168.1.103', '2026-06-24 14:20:00', '2025-04-05 08:15:00', NOW(), NULL),
+(5, 'rbrown', 'robert.brown@company.com', 'hash_33333', 'salt_mno345', 'Robert', 'Brown', '09171234571', 'https://cdn.company.com/avatars/rbrown.jpg', 'active', '192.168.1.104', '2026-06-23 11:30:00', '2025-05-12 13:45:00', NOW(), NULL),
+(6, 'ldavis', 'linda.davis@company.com', 'hash_44444', 'salt_pqr678', 'Linda', 'Davis', '09171234572', 'https://cdn.company.com/avatars/ldavis.jpg', 'active', '192.168.1.105', '2026-06-25 10:00:00', '2025-06-18 09:30:00', NOW(), NULL),
+(7, 'pwilson', 'paul.wilson@company.com', 'hash_55555', 'salt_stu901', 'Paul', 'Wilson', '09171234573', 'https://cdn.company.com/avatars/pwilson.jpg', 'active', '192.168.1.106', '2026-06-22 08:45:00', '2025-07-22 14:00:00', NOW(), NULL),
+(8, 'mmartinez', 'maria.martinez@company.com', 'hash_66666', 'salt_vwx234', 'Maria', 'Martinez', '09171234574', 'https://cdn.company.com/avatars/mmartinez.jpg', 'active', '192.168.1.107', '2026-06-25 11:20:00', '2025-08-14 10:30:00', NOW(), NULL),
+(9, 'jtaylor', 'james.taylor@company.com', 'hash_77777', 'salt_yza567', 'James', 'Taylor', '09171234575', 'https://cdn.company.com/avatars/jtaylor.jpg', 'suspended', '192.168.1.108', '2026-06-21 09:00:00', '2025-09-05 08:00:00', NOW(), NULL),
+(10, 'awilson', 'amy.wilson@company.com', 'hash_88888', 'salt_bcd890', 'Amy', 'Wilson', '09171234576', 'https://cdn.company.com/avatars/awilson.jpg', 'active', '192.168.1.109', '2026-06-24 15:30:00', '2025-10-10 11:00:00', NOW(), NULL),
+(11, 'canderson', 'chris.anderson@company.com', 'hash_99999', 'salt_efg123', 'Chris', 'Anderson', '09171234577', 'https://cdn.company.com/avatars/canderson.jpg', 'active', '192.168.1.110', '2026-06-23 10:15:00', '2025-11-01 09:45:00', NOW(), NULL),
+(12, 'kthomas', 'karen.thomas@company.com', 'hash_10101', 'salt_hij456', 'Karen', 'Thomas', '09171234578', 'https://cdn.company.com/avatars/kthomas.jpg', 'active', '192.168.1.111', '2026-06-25 13:00:00', '2025-12-12 14:30:00', NOW(), NULL),
+(13, 'bjohnson', 'brian.johnson@company.com', 'hash_12121', 'salt_klm789', 'Brian', 'Johnson', '09171234579', 'https://cdn.company.com/avatars/bjohnson.jpg', 'active', '192.168.1.112', '2026-06-20 16:20:00', '2026-01-15 08:00:00', NOW(), NULL),
+(14, 'lwhite', 'laura.white@company.com', 'hash_13131', 'salt_nop012', 'Laura', 'White', '09171234580', 'https://cdn.company.com/avatars/lwhite.jpg', 'active', '192.168.1.113', '2026-06-24 12:45:00', '2026-02-20 13:15:00', NOW(), NULL),
+(15, 'dclark', 'david.clark@company.com', 'hash_14141', 'salt_qrs345', 'David', 'Clark', '09171234581', 'https://cdn.company.com/avatars/dclark.jpg', 'active', '192.168.1.114', '2026-06-22 11:30:00', '2026-03-05 10:00:00', NOW(), NULL),
+(16, 'srodriguez', 'susan.rodriguez@company.com', 'hash_15151', 'salt_tuv678', 'Susan', 'Rodriguez', '09171234582', 'https://cdn.company.com/avatars/srodriguez.jpg', 'active', '192.168.1.115', '2026-06-25 14:10:00', '2026-04-18 09:30:00', NOW(), NULL),
+(17, 'mlee', 'michael.lee@company.com', 'hash_16161', 'salt_wxy901', 'Michael', 'Lee', '09171234583', 'https://cdn.company.com/avatars/mlee.jpg', 'active', '192.168.1.116', '2026-06-21 08:00:00', '2026-05-01 11:45:00', NOW(), NULL),
+(18, 'jkim', 'jennifer.kim@company.com', 'hash_17171', 'salt_zab234', 'Jennifer', 'Kim', '09171234584', 'https://cdn.company.com/avatars/jkim.jpg', 'active', '192.168.1.117', '2026-06-23 13:50:00', '2026-05-15 14:00:00', NOW(), NULL),
+(19, 'tharris', 'thomas.harris@company.com', 'hash_18181', 'salt_cde567', 'Thomas', 'Harris', '09171234585', 'https://cdn.company.com/avatars/tharris.jpg', 'suspended', '192.168.1.118', '2026-06-19 10:30:00', '2026-06-01 08:15:00', NOW(), NULL),
+(20, 'moore', 'elizabeth.moore@company.com', 'hash_19191', 'salt_fgh890', 'Elizabeth', 'Moore', '09171234586', 'https://cdn.company.com/avatars/moore.jpg', 'active', '192.168.1.119', '2026-06-24 09:20:00', '2026-06-10 12:00:00', NOW(), NULL),
+(21, 'mthompson', 'mark.thompson@company.com', 'hash_del1', 'salt_del_abc', 'Mark', 'Thompson', '09171234587', 'https://cdn.company.com/avatars/mthompson.jpg', 'active', '192.168.1.120', '2026-06-15 10:00:00', '2026-06-15 09:00:00', '2026-06-20 09:00:00', '2026-06-20 09:00:00'),
+(22, 'sgreen', 'susan.green@company.com', 'hash_del2', 'salt_del_def', 'Susan', 'Green', '09171234588', 'https://cdn.company.com/avatars/sgreen.jpg', 'active', '192.168.1.121', '2026-06-18 14:30:00', '2026-06-18 09:00:00', '2026-06-22 09:00:00', '2026-06-22 09:00:00'),
+(23, 'rwright', 'robert.wright@company.com', 'hash_del3', 'salt_del_ghi', 'Robert', 'Wright', '09171234589', 'https://cdn.company.com/avatars/rwright.jpg', 'active', '192.168.1.122', '2026-06-10 08:00:00', '2026-06-10 09:00:00', '2026-06-25 09:00:00', '2026-06-25 09:00:00'),
+(24, 'krobinson', 'karen.robinson@company.com', 'hash_del4', 'salt_del_jkl', 'Karen', 'Robinson', '09171234590', 'https://cdn.company.com/avatars/krobinson.jpg', 'active', '192.168.1.123', '2026-06-12 11:00:00', '2026-06-12 09:00:00', '2026-06-28 09:00:00', '2026-06-28 09:00:00'),
+(25, 'jallen', 'james.allen@company.com', 'hash_20202', 'salt_mno202', 'James', 'Allen', '09171234591', 'https://cdn.company.com/avatars/jallen.jpg', 'active', '192.168.1.124', '2026-06-26 08:00:00', '2026-06-20 08:00:00', NOW(), NULL),
+(26, 'cwright', 'catherine.wright@company.com', 'hash_21212', 'salt_pqr212', 'Catherine', 'Wright', '09171234592', 'https://cdn.company.com/avatars/cwright.jpg', 'active', '192.168.1.125', '2026-06-26 09:00:00', '2026-06-21 09:00:00', NOW(), NULL),
+(27, 'dking', 'daniel.king@company.com', 'hash_22222', 'salt_stu222', 'Daniel', 'King', '09171234593', 'https://cdn.company.com/avatars/dking.jpg', 'active', '192.168.1.126', '2026-06-26 10:00:00', '2026-06-22 10:00:00', NOW(), NULL),
+(28, 'ewright', 'emily.wright@company.com', 'hash_23232', 'salt_vwx232', 'Emily', 'Wright', '09171234594', 'https://cdn.company.com/avatars/ewright.jpg', 'active', '192.168.1.127', '2026-06-26 11:00:00', '2026-06-23 11:00:00', NOW(), NULL),
+(29, 'fyoung', 'frank.young@company.com', 'hash_24242', 'salt_yza242', 'Frank', 'Young', '09171234595', 'https://cdn.company.com/avatars/fyoung.jpg', 'suspended', '192.168.1.128', '2026-06-20 12:00:00', '2026-06-24 12:00:00', NOW(), NULL),
+(30, 'ghill', 'grace.hill@company.com', 'hash_25252', 'salt_bcd252', 'Grace', 'Hill', '09171234596', 'https://cdn.company.com/avatars/ghill.jpg', 'active', '192.168.1.129', '2026-06-26 13:00:00', '2026-06-25 13:00:00', NOW(), NULL),
+(31, 'hscott', 'harold.scott@company.com', 'hash_26262', 'salt_efg262', 'Harold', 'Scott', '09171234597', 'https://cdn.company.com/avatars/hscott.jpg', 'active', '192.168.1.130', '2026-06-26 14:00:00', '2026-06-26 14:00:00', NOW(), NULL),
+(32, 'iwhite', 'irene.white@company.com', 'hash_27272', 'salt_hij272', 'Irene', 'White', '09171234598', 'https://cdn.company.com/avatars/iwhite.jpg', 'active', '192.168.1.131', '2026-06-26 15:00:00', '2026-06-27 15:00:00', NOW(), NULL),
+(33, 'jgreen', 'jason.green@company.com', 'hash_28282', 'salt_klm282', 'Jason', 'Green', '09171234599', 'https://cdn.company.com/avatars/jgreen.jpg', 'active', '192.168.1.132', '2026-06-26 16:00:00', '2026-06-28 16:00:00', NOW(), NULL),
+(34, 'kadams', 'karen.adams@company.com', 'hash_29292', 'salt_nop292', 'Karen', 'Adams', '09171234600', 'https://cdn.company.com/avatars/kadams.jpg', 'active', '192.168.1.133', '2026-06-26 17:00:00', '2026-06-29 17:00:00', NOW(), NULL),
+(35, 'lbaker', 'lisa.baker@company.com', 'hash_30303', 'salt_qrs303', 'Lisa', 'Baker', '09171234601', 'https://cdn.company.com/avatars/lbaker.jpg', 'active', '192.168.1.134', '2026-06-26 18:00:00', '2026-06-30 18:00:00', NOW(), NULL),
+(36, 'mcooper', 'michael.cooper@company.com', 'hash_31313', 'salt_stu313', 'Michael', 'Cooper', '09171234602', 'https://cdn.company.com/avatars/mcooper.jpg', 'active', '192.168.1.135', '2026-06-26 19:00:00', '2026-07-01 19:00:00', NOW(), NULL),
+(37, 'nwood', 'nancy.wood@company.com', 'hash_32323', 'salt_vwx323', 'Nancy', 'Wood', '09171234603', 'https://cdn.company.com/avatars/nwood.jpg', 'active', '192.168.1.136', '2026-06-26 20:00:00', '2026-07-02 20:00:00', NOW(), NULL),
+(38, 'opatrick', 'oliver.patrick@company.com', 'hash_33333', 'salt_yza333', 'Oliver', 'Patrick', '09171234604', 'https://cdn.company.com/avatars/opatrick.jpg', 'active', '192.168.1.137', '2026-06-26 21:00:00', '2026-07-03 21:00:00', NOW(), NULL),
+(39, 'pquinn', 'patricia.quinn@company.com', 'hash_34343', 'salt_bcd343', 'Patricia', 'Quinn', '09171234605', 'https://cdn.company.com/avatars/pquinn.jpg', 'active', '192.168.1.138', '2026-06-26 22:00:00', '2026-07-04 22:00:00', NOW(), NULL),
+(40, 'qroberts', 'quinn.roberts@company.com', 'hash_35353', 'salt_efg353', 'Quinn', 'Roberts', '09171234606', 'https://cdn.company.com/avatars/qroberts.jpg', 'active', '192.168.1.139', '2026-06-26 23:00:00', '2026-07-05 23:00:00', NOW(), NULL),
+(41, 'rsmith', 'rachel.smith@company.com', 'hash_36363', 'salt_hij363', 'Rachel', 'Smith', '09171234607', 'https://cdn.company.com/avatars/rsmith.jpg', 'active', '192.168.1.140', '2026-06-27 00:00:00', '2026-07-06 00:00:00', NOW(), NULL),
+(42, 'staylor', 'samuel.taylor@company.com', 'hash_37373', 'salt_klm373', 'Samuel', 'Taylor', '09171234608', 'https://cdn.company.com/avatars/staylor.jpg', 'active', '192.168.1.141', '2026-06-27 01:00:00', '2026-07-07 01:00:00', NOW(), NULL),
+(43, 'tunderwood', 'tina.underwood@company.com', 'hash_38383', 'salt_nop383', 'Tina', 'Underwood', '09171234609', 'https://cdn.company.com/avatars/tunderwood.jpg', 'active', '192.168.1.142', '2026-06-27 02:00:00', '2026-07-08 02:00:00', NOW(), NULL),
+(44, 'uvance', 'ursula.vance@company.com', 'hash_39393', 'salt_qrs393', 'Ursula', 'Vance', '09171234610', 'https://cdn.company.com/avatars/uvance.jpg', 'active', '192.168.1.143', '2026-06-27 03:00:00', '2026-07-09 03:00:00', NOW(), NULL),
+(45, 'vwalker', 'victor.walker@company.com', 'hash_40404', 'salt_stu404', 'Victor', 'Walker', '09171234611', 'https://cdn.company.com/avatars/vwalker.jpg', 'active', '192.168.1.144', '2026-06-27 04:00:00', '2026-07-10 04:00:00', NOW(), NULL),
+(46, 'wxavier', 'wendy.xavier@company.com', 'hash_41414', 'salt_vwx414', 'Wendy', 'Xavier', '09171234612', 'https://cdn.company.com/avatars/wxavier.jpg', 'active', '192.168.1.145', '2026-06-27 05:00:00', '2026-07-11 05:00:00', NOW(), NULL),
+(47, 'xyoung', 'xavier.young@company.com', 'hash_42424', 'salt_yza424', 'Xavier', 'Young', '09171234613', 'https://cdn.company.com/avatars/xyoung.jpg', 'active', '192.168.1.146', '2026-06-27 06:00:00', '2026-07-12 06:00:00', NOW(), NULL),
+(48, 'yzimmerman', 'yvonne.zimmerman@company.com', 'hash_43434', 'salt_bcd434', 'Yvonne', 'Zimmerman', '09171234614', 'https://cdn.company.com/avatars/yzimmerman.jpg', 'active', '192.168.1.147', '2026-06-27 07:00:00', '2026-07-13 07:00:00', NOW(), NULL),
+(49, 'zabel', 'zachary.abel@company.com', 'hash_44444', 'salt_efg444', 'Zachary', 'Abel', '09171234615', 'https://cdn.company.com/avatars/zabel.jpg', 'active', '192.168.1.148', '2026-06-27 08:00:00', '2026-07-14 08:00:00', NOW(), NULL),
+(50, 'bmoore', 'betty.moore@company.com', 'hash_45454', 'salt_hij454', 'Betty', 'Moore', '09171234616', 'https://cdn.company.com/avatars/bmoore.jpg', 'locked', '192.168.1.149', '2026-06-27 09:00:00', '2026-07-15 09:00:00', NOW(), NULL);
 
 -- ============================================================
--- 4. USER_ROLES (10 entries) – Repeating roles (multiple Employees)
+-- 4. INSERT USER_ROLES (50 entries) – Matches users 1-50
 -- ============================================================
 INSERT INTO user_roles (user_id, role_id, assigned_at, assigned_by) VALUES
-(1, 1, '2026-01-15 09:00:00', 1),   -- John Doe → Admin
-(2, 3, '2026-01-15 09:00:00', 1),   -- Jane Smith → Employee (Repeating)
-(3, 2, '2026-01-15 09:00:00', 1),   -- Mike Johnson → Manager
-(4, 3, '2026-01-15 09:00:00', 2),   -- Sarah Williams → Employee (Repeating)
-(5, 3, '2026-01-15 09:00:00', 2),   -- Robert Brown → Employee (Repeating)
-(6, 4, '2026-01-15 09:00:00', 3),   -- Linda Davis → HR Specialist
-(7, 5, '2026-01-15 09:00:00', 3),   -- Paul Wilson → Payroll Officer
-(8, 6, '2026-01-15 09:00:00', 1),   -- Maria Martinez → IT Support
-(9, 3, '2026-01-15 09:00:00', 1),   -- James Taylor → Employee (Soft-deleted)
-(10, 10, '2026-01-15 09:00:00', 6); -- Amy Wilson → Intern (Locked)
+(1, 1, '2026-01-15 09:00:00', 1),   -- Admin
+(2, 3, '2026-01-15 09:00:00', 1),
+(3, 2, '2026-01-15 09:00:00', 1),
+(4, 3, '2026-01-15 09:00:00', 2),
+(5, 3, '2026-01-15 09:00:00', 2),
+(6, 4, '2026-01-15 09:00:00', 3),
+(7, 5, '2026-01-15 09:00:00', 3),
+(8, 6, '2026-01-15 09:00:00', 1),
+(9, 3, '2026-01-15 09:00:00', 1),
+(10, 10, '2026-01-15 09:00:00', 6),
+(11, 7, '2026-01-15 09:00:00', 1),
+(12, 3, '2026-01-15 09:00:00', 1),
+(13, 3, '2026-01-15 09:00:00', 1),
+(14, 3, '2026-01-15 09:00:00', 1),
+(15, 2, '2026-01-15 09:00:00', 1),
+(16, 8, '2026-01-15 09:00:00', 1),
+(17, 3, '2026-01-15 09:00:00', 1),
+(18, 9, '2026-01-15 09:00:00', 1),
+(19, 3, '2026-01-15 09:00:00', 1),
+(20, 3, '2026-01-15 09:00:00', 1),
+(21, 3, '2026-01-15 09:00:00', 1),
+(22, 3, '2026-01-15 09:00:00', 1),
+(23, 3, '2026-01-15 09:00:00', 1),
+(24, 3, '2026-01-15 09:00:00', 1),
+(25, 3, '2026-01-15 09:00:00', 1),
+(26, 3, '2026-01-15 09:00:00', 1),
+(27, 3, '2026-01-15 09:00:00', 1),
+(28, 3, '2026-01-15 09:00:00', 1),
+(29, 3, '2026-01-15 09:00:00', 1),
+(30, 3, '2026-01-15 09:00:00', 1),
+(31, 3, '2026-01-15 09:00:00', 1),
+(32, 3, '2026-01-15 09:00:00', 1),
+(33, 3, '2026-01-15 09:00:00', 1),
+(34, 3, '2026-01-15 09:00:00', 1),
+(35, 3, '2026-01-15 09:00:00', 1),
+(36, 3, '2026-01-15 09:00:00', 1),
+(37, 3, '2026-01-15 09:00:00', 1),
+(38, 3, '2026-01-15 09:00:00', 1),
+(39, 3, '2026-01-15 09:00:00', 1),
+(40, 3, '2026-01-15 09:00:00', 1),
+(41, 3, '2026-01-15 09:00:00', 1),
+(42, 3, '2026-01-15 09:00:00', 1),
+(43, 3, '2026-01-15 09:00:00', 1),
+(44, 3, '2026-01-15 09:00:00', 1),
+(45, 3, '2026-01-15 09:00:00', 1),
+(46, 3, '2026-01-15 09:00:00', 1),
+(47, 3, '2026-01-15 09:00:00', 1),
+(48, 3, '2026-01-15 09:00:00', 1),
+(49, 3, '2026-01-15 09:00:00', 1),
+(50, 3, '2026-01-15 09:00:00', 1);
 
 -- ============================================================
--- 5. ROLE_PERMISSIONS (10 entries) – Admin gets all 10 permissions
+-- 5. INSERT ROLE_PERMISSIONS (Admin gets all 50)
 -- ============================================================
 INSERT INTO role_permissions (role_id, permission_id, assigned_at) VALUES
-(1, 1, '2026-01-15 09:00:00'),
-(1, 2, '2026-01-15 09:00:00'),
-(1, 3, '2026-01-15 09:00:00'),
-(1, 4, '2026-01-15 09:00:00'),
-(1, 5, '2026-01-15 09:00:00'),
-(1, 6, '2026-01-15 09:00:00'),
-(1, 7, '2026-01-15 09:00:00'),
-(1, 8, '2026-01-15 09:00:00'),
-(1, 9, '2026-01-15 09:00:00'),
-(1, 10, '2026-01-15 09:00:00');
+(1, 1, NOW()), (1, 2, NOW()), (1, 3, NOW()), (1, 4, NOW()), (1, 5, NOW()),
+(1, 6, NOW()), (1, 7, NOW()), (1, 8, NOW()), (1, 9, NOW()), (1, 10, NOW()),
+(1, 11, NOW()), (1, 12, NOW()), (1, 13, NOW()), (1, 14, NOW()), (1, 15, NOW()),
+(1, 16, NOW()), (1, 17, NOW()), (1, 18, NOW()), (1, 19, NOW()), (1, 20, NOW()),
+(1, 21, NOW()), (1, 22, NOW()), (1, 23, NOW()), (1, 24, NOW()), (1, 25, NOW()),
+(1, 26, NOW()), (1, 27, NOW()), (1, 28, NOW()), (1, 29, NOW()), (1, 30, NOW()),
+(1, 31, NOW()), (1, 32, NOW()), (1, 33, NOW()), (1, 34, NOW()), (1, 35, NOW()),
+(1, 36, NOW()), (1, 37, NOW()), (1, 38, NOW()), (1, 39, NOW()), (1, 40, NOW()),
+(1, 41, NOW()), (1, 42, NOW()), (1, 43, NOW()), (1, 44, NOW()), (1, 45, NOW()),
+(1, 46, NOW()), (1, 47, NOW()), (1, 48, NOW()), (1, 49, NOW()), (1, 50, NOW());
 
 -- ============================================================
--- 6. SESSIONS (10 entries) – Multiple sessions per user (Repeating)
---    User 1: 4 sessions, User 2: 3, User 3: 2, User 4: 1
+-- 6. INSERT SESSIONS (50 entries)
 -- ============================================================
 INSERT INTO sessions (user_id, session_token, ip_address, user_agent, expires_at, created_at) VALUES
--- User 1 (jdoe) – 4 sessions
-(1, 'sess_a1b2c3d4e5f6g7h8i9j0', '192.168.1.100', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', '2026-06-21 09:30:00', '2026-06-20 09:30:00'),
-(1, 'sess_k1l2m3n4o5p6q7r8s9t0', '192.168.1.100', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', '2026-06-23 14:15:00', '2026-06-22 14:15:00'),
-(1, 'sess_u1v2w3x4y5z6a7b8c9d0', '192.168.1.100', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', '2026-06-25 08:00:00', '2026-06-24 08:00:00'),
-(1, 'sess_e1f2g3h4i5j6k7l8m9n0', '192.168.1.100', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', '2026-06-26 17:30:00', '2026-06-25 17:30:00'),
-
--- User 2 (jsmith) – 3 sessions
-(2, 'sess_o1p2q3r4s5t6u7v8w9x0', '192.168.1.101', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36', '2026-06-22 11:20:00', '2026-06-21 11:20:00'),
-(2, 'sess_y1z2a3b4c5d6e7f8g9h0', '192.168.1.101', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36', '2026-06-24 09:45:00', '2026-06-23 09:45:00'),
-(2, 'sess_i1j2k3l4m5n6o7p8q9r0', '192.168.1.101', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36', '2026-06-26 13:10:00', '2026-06-25 13:10:00'),
-
--- User 3 (mjohnson) – 2 sessions
-(3, 'sess_s1t2u3v4w5x6y7z8a9b0', '192.168.1.102', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15', '2026-06-25 09:00:00', '2026-06-24 09:00:00'),
-(3, 'sess_c1d2e3f4g5h6i7j8k9l0', '192.168.1.102', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15', '2026-06-25 18:30:00', '2026-06-24 18:30:00'),
-
--- User 4 (swilliams) – 1 session
-(4, 'sess_m1n2o3p4q5r6s7t8u9v0', '192.168.1.103', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', '2026-06-24 10:30:00', '2026-06-23 10:30:00');
+(1, 'sess_a1b2c3d4e5f6g7h8i9', '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-21 09:30:00', '2026-06-20 09:30:00'),
+(1, 'sess_k1l2m3n4o5p6q7r8s9', '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-23 14:15:00', '2026-06-22 14:15:00'),
+(1, 'sess_u1v2w3x4y5z6a7b8c9', '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-25 08:00:00', '2026-06-24 08:00:00'),
+(1, 'sess_e1f2g3h4i5j6k7l8m9', '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-26 17:30:00', '2026-06-25 17:30:00'),
+(2, 'sess_o1p2q3r4s5t6u7v8w9', '192.168.1.101', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-22 11:20:00', '2026-06-21 11:20:00'),
+(2, 'sess_y1z2a3b4c5d6e7f8g9', '192.168.1.101', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-24 09:45:00', '2026-06-23 09:45:00'),
+(2, 'sess_i1j2k3l4m5n6o7p8q', '192.168.1.101', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-26 13:10:00', '2026-06-25 13:10:00'),
+(3, 'sess_s1t2u3v4w5x6y7z8a', '192.168.1.102', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-25 09:00:00', '2026-06-24 09:00:00'),
+(3, 'sess_c1d2e3f4g5h6i7j8k', '192.168.1.102', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-25 18:30:00', '2026-06-24 18:30:00'),
+(4, 'sess_m1n2o3p4q5r6s7t8u', '192.168.1.103', 'Mozilla/5.0 (Firefox/89.0)', '2026-06-24 10:30:00', '2026-06-23 10:30:00'),
+(5, 'sess_g1h2i3j4k5l6m7n8o', '192.168.1.104', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-06-24 11:30:00', '2026-06-23 11:30:00'),
+(6, 'sess_q1r2s3t4u5v6w7x8y', '192.168.1.105', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-25 10:00:00', '2026-06-24 10:00:00'),
+(7, 'sess_b1c2d3e4f5g6h7i8j9', '192.168.1.106', 'Mozilla/5.0 (Macintosh) AppleWebKit/605.1.15', '2026-06-23 08:45:00', '2026-06-22 08:45:00'),
+(8, 'sess_l1m2n3o4p5q6r7s8t', '192.168.1.107', 'Mozilla/5.0 (Firefox/90.0)', '2026-06-26 11:20:00', '2026-06-25 11:20:00'),
+(8, 'sess_v1w2x3y4z5a6b7c8d', '192.168.1.107', 'Mozilla/5.0 (Firefox/90.0)', '2026-06-26 20:00:00', '2026-06-25 20:00:00'),
+(10, 'sess_f1g2h3i4j5k6l7m8n', '192.168.1.109', 'Mozilla/5.0 (Android) AppleWebKit/537.36', '2026-06-25 15:30:00', '2026-06-24 15:30:00'),
+(11, 'sess_r1s2t3u4v5w6x7y8z', '192.168.1.110', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-24 10:15:00', '2026-06-23 10:15:00'),
+(12, 'sess_z1a2b3c4d5e6f7g8h', '192.168.1.111', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-26 13:00:00', '2026-06-25 13:00:00'),
+(14, 'sess_j1k2l3m4n5o6p7q8', '192.168.1.113', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-25 12:45:00', '2026-06-24 12:45:00'),
+(15, 'sess_t1u2v3w4x5y6z7a8', '192.168.1.114', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-06-23 11:30:00', '2026-06-22 11:30:00'),
+(16, 'sess_d1e2f3g4h5i6j7k8', '192.168.1.115', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-26 14:10:00', '2026-06-25 14:10:00'),
+(18, 'sess_n1o2p3q4r5s6t7u8', '192.168.1.117', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-24 13:50:00', '2026-06-23 13:50:00'),
+(20, 'sess_h1i2j3k4l5m6n7o8', '192.168.1.119', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-25 09:20:00', '2026-06-24 09:20:00'),
+(25, 'sess_p1q2r3s4t5u6v7w8', '192.168.1.124', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-27 08:00:00', '2026-06-26 08:00:00'),
+(26, 'sess_w1x2y3z4a5b6c7d8', '192.168.1.125', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-27 09:00:00', '2026-06-26 09:00:00'),
+(27, 'sess_a1b2c3d4e5f6g7h8i0', '192.168.1.126', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-27 10:00:00', '2026-06-26 10:00:00'),
+(28, 'sess_k1l2m3n4o5p6q7r8s0', '192.168.1.127', 'Mozilla/5.0 (Firefox/89.0)', '2026-06-27 11:00:00', '2026-06-26 11:00:00'),
+(29, 'sess_u1v2w3x4y5z6a7b8c0', '192.168.1.128', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-06-21 12:00:00', '2026-06-20 12:00:00'),
+(30, 'sess_e1f2g3h4i5j6k7l8m0', '192.168.1.129', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-27 13:00:00', '2026-06-26 13:00:00'),
+(31, 'sess_o1p2q3r4s5t6u7v8w0', '192.168.1.130', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-27 14:00:00', '2026-06-26 14:00:00'),
+(32, 'sess_y1z2a3b4c5d6e7f8g0', '192.168.1.131', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-27 15:00:00', '2026-06-26 15:00:00'),
+(33, 'sess_i1j2k3l4m5n6o7p8q0', '192.168.1.132', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-27 16:00:00', '2026-06-26 16:00:00'),
+(34, 'sess_s1t2u3v4w5x6y7z8a0', '192.168.1.133', 'Mozilla/5.0 (Firefox/89.0)', '2026-06-27 17:00:00', '2026-06-26 17:00:00'),
+(35, 'sess_c1d2e3f4g5h6i7j8k0', '192.168.1.134', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-06-27 18:00:00', '2026-06-26 18:00:00'),
+(36, 'sess_m1n2o3p4q5r6s7t8u0', '192.168.1.135', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-27 19:00:00', '2026-06-26 19:00:00'),
+(37, 'sess_g1h2i3j4k5l6m7n8o0', '192.168.1.136', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-27 20:00:00', '2026-06-26 20:00:00'),
+(38, 'sess_q1r2s3t4u5v6w7x8y0', '192.168.1.137', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-27 21:00:00', '2026-06-26 21:00:00'),
+(39, 'sess_b1c2d3e4f5g6h7i8j0', '192.168.1.138', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-27 22:00:00', '2026-06-26 22:00:00'),
+(40, 'sess_l1m2n3o4p5q6r7s8t0', '192.168.1.139', 'Mozilla/5.0 (Firefox/89.0)', '2026-06-27 23:00:00', '2026-06-26 23:00:00'),
+(41, 'sess_v1w2x3y4z5a6b7c8d0', '192.168.1.140', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-06-28 00:00:00', '2026-06-27 00:00:00'),
+(42, 'sess_f1g2h3i4j5k6l7m8n0', '192.168.1.141', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-28 01:00:00', '2026-06-27 01:00:00'),
+(43, 'sess_r1s2t3u4v5w6x7y8z0', '192.168.1.142', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-28 02:00:00', '2026-06-27 02:00:00'),
+(44, 'sess_z1a2b3c4d5e6f7g8h0', '192.168.1.143', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-28 03:00:00', '2026-06-27 03:00:00'),
+(45, 'sess_j1k2l3m4n5o6p7q8r0', '192.168.1.144', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-28 04:00:00', '2026-06-27 04:00:00'),
+(46, 'sess_t1u2v3w4x5y6z7a8b0', '192.168.1.145', 'Mozilla/5.0 (Firefox/89.0)', '2026-06-28 05:00:00', '2026-06-27 05:00:00'),
+(47, 'sess_d1e2f3g4h5i6j7k8l0', '192.168.1.146', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-06-28 06:00:00', '2026-06-27 06:00:00'),
+(48, 'sess_n1o2p3q4r5s6t7u8v0', '192.168.1.147', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-28 07:00:00', '2026-06-27 07:00:00'),
+(49, 'sess_h1i2j3k4l5m6n7o8p0', '192.168.1.148', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-28 08:00:00', '2026-06-27 08:00:00'),
+(50, 'sess_p1q2r3s4t5u6v7w8x0', '192.168.1.149', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-28 09:00:00', '2026-06-27 09:00:00');
 
 -- ============================================================
--- 7. PASSWORD_RESETS (10 entries) – Repeating users (User 1 & 3 have 2 each)
+-- 7. INSERT PASSWORD_RESETS (50 entries)
 -- ============================================================
 INSERT INTO password_resets (user_id, token, expires_at, used_at, created_at) VALUES
--- User 1 (jdoe) – 2 resets
-(1, 'reset_a1b2c3d4e5f6g7h8i9', '2026-06-20 10:00:00', '2026-06-20 09:30:00', '2026-06-20 09:00:00'),
-(1, 'reset_x1y2z3a4b5c6d7e8f9g0', '2026-06-22 10:00:00', NULL, '2026-06-22 09:00:00'),
-
--- User 2 (jsmith) – 1 reset
-(2, 'reset_j0k1l2m3n4o5p6q7r8', '2026-06-21 15:00:00', NULL, '2026-06-21 14:00:00'),
-
--- User 3 (mjohnson) – 2 resets
-(3, 'reset_s9t0u1v2w3x4y5z6a7', '2026-06-22 09:00:00', '2026-06-22 08:15:00', '2026-06-22 08:00:00'),
-(3, 'reset_h1i2j3k4l5m6n7o8p9q0', '2026-06-24 09:00:00', '2026-06-24 08:45:00', '2026-06-24 08:00:00'),
-
--- User 4 (swilliams) – 1 reset
-(4, 'reset_b8c9d0e1f2g3h4i5j6', '2026-06-23 12:00:00', NULL, '2026-06-23 11:00:00'),
-
--- User 5 (rbrown) – 1 reset
-(5, 'reset_k7l8m9n0o1p2q3r4s5', '2026-06-24 17:00:00', NULL, '2026-06-24 16:00:00'),
-
--- User 6 (ldavis) – 1 reset
-(6, 'reset_t6u5v4w3x2y1z0a9b8', '2026-06-25 11:00:00', '2026-06-25 10:20:00', '2026-06-25 10:00:00'),
-
--- User 7 (pwilson) – 1 reset
-(7, 'reset_c7d8e9f0g1h2i3j4k5', '2026-06-26 10:00:00', NULL, '2026-06-26 09:00:00'),
-
--- User 8 (mmartinez) – 1 reset
-(8, 'reset_l6m7n8o9p0q1r2s3t4', '2026-06-27 15:00:00', '2026-06-27 14:30:00', '2026-06-27 14:00:00');
+(1, 'reset_user_0001_01', '2026-06-20 10:00:00', '2026-06-20 10:00:00', '2026-06-20 09:00:00'),
+(1, 'reset_user_0001_02', '2026-06-22 10:00:00', NULL, '2026-06-22 09:00:00'),
+(2, 'reset_user_0002_01', '2026-06-21 15:00:00', NULL, '2026-06-21 14:00:00'),
+(3, 'reset_user_0003_01', '2026-06-22 09:00:00', '2026-06-22 08:15:00', '2026-06-22 08:00:00'),
+(3, 'reset_user_0003_02', '2026-06-24 09:00:00', '2026-06-24 08:45:00', '2026-06-24 08:00:00'),
+(4, 'reset_user_0004_01', '2026-06-23 12:00:00', NULL, '2026-06-23 11:00:00'),
+(5, 'reset_user_0005_01', '2026-06-24 17:00:00', NULL, '2026-06-24 16:00:00'),
+(6, 'reset_user_0006_01', '2026-06-25 11:00:00', '2026-06-25 10:20:00', '2026-06-25 10:00:00'),
+(7, 'reset_user_0007_01', '2026-06-26 10:00:00', NULL, '2026-06-26 09:00:00'),
+(8, 'reset_user_0008_01', '2026-06-27 15:00:00', '2026-06-27 14:30:00', '2026-06-27 14:00:00'),
+(9, 'reset_user_0009_01', '2026-06-28 09:00:00', NULL, '2026-06-28 08:00:00'),
+(10, 'reset_user_0010_01', '2026-06-29 12:00:00', NULL, '2026-06-29 11:00:00'),
+(11, 'reset_user_0011_01', '2026-06-30 17:00:00', '2026-06-30 16:15:00', '2026-06-30 16:00:00'),
+(12, 'reset_user_0012_01', '2026-07-01 10:00:00', NULL, '2026-07-01 09:00:00'),
+(13, 'reset_user_0013_01', '2026-07-02 15:00:00', NULL, '2026-07-02 14:00:00'),
+(14, 'reset_user_0014_01', '2026-07-03 09:00:00', '2026-07-03 08:45:00', '2026-07-03 08:00:00'),
+(15, 'reset_user_0015_01', '2026-07-04 12:00:00', NULL, '2026-07-04 11:00:00'),
+(16, 'reset_user_0016_01', '2026-07-05 17:00:00', NULL, '2026-07-05 16:00:00'),
+(17, 'reset_user_0017_01', '2026-07-06 10:00:00', '2026-07-06 09:10:00', '2026-07-06 09:00:00'),
+(18, 'reset_user_0018_01', '2026-07-07 15:00:00', NULL, '2026-07-07 14:00:00'),
+(19, 'reset_user_0019_01', '2026-07-08 09:00:00', NULL, '2026-07-08 08:00:00'),
+(20, 'reset_user_0020_01', '2026-07-09 12:00:00', '2026-07-09 11:30:00', '2026-07-09 11:00:00'),
+(21, 'reset_user_0021_01', '2026-07-10 10:00:00', NULL, '2026-07-10 09:00:00'),
+(22, 'reset_user_0022_01', '2026-07-11 14:00:00', NULL, '2026-07-11 13:00:00'),
+(23, 'reset_user_0023_01', '2026-07-12 09:00:00', '2026-07-12 08:30:00', '2026-07-12 08:00:00'),
+(24, 'reset_user_0024_01', '2026-07-13 16:00:00', NULL, '2026-07-13 15:00:00'),
+(25, 'reset_user_0025_01', '2026-07-14 11:00:00', NULL, '2026-07-14 10:00:00'),
+(26, 'reset_user_0026_01', '2026-07-15 13:00:00', '2026-07-15 12:45:00', '2026-07-15 12:00:00'),
+(27, 'reset_user_0027_01', '2026-07-16 10:00:00', NULL, '2026-07-16 09:00:00'),
+(28, 'reset_user_0028_01', '2026-07-17 15:00:00', NULL, '2026-07-17 14:00:00'),
+(29, 'reset_user_0029_01', '2026-07-18 09:00:00', '2026-07-18 08:30:00', '2026-07-18 08:00:00'),
+(30, 'reset_user_0030_01', '2026-07-19 12:00:00', NULL, '2026-07-19 11:00:00'),
+(31, 'reset_user_0031_01', '2026-07-20 17:00:00', NULL, '2026-07-20 16:00:00'),
+(32, 'reset_user_0032_01', '2026-07-21 10:00:00', '2026-07-21 09:30:00', '2026-07-21 09:00:00'),
+(33, 'reset_user_0033_01', '2026-07-22 14:00:00', NULL, '2026-07-22 13:00:00'),
+(34, 'reset_user_0034_01', '2026-07-23 09:00:00', NULL, '2026-07-23 08:00:00'),
+(35, 'reset_user_0035_01', '2026-07-24 16:00:00', '2026-07-24 15:45:00', '2026-07-24 15:00:00'),
+(36, 'reset_user_0036_01', '2026-07-25 11:00:00', NULL, '2026-07-25 10:00:00'),
+(37, 'reset_user_0037_01', '2026-07-26 13:00:00', NULL, '2026-07-26 12:00:00'),
+(38, 'reset_user_0038_01', '2026-07-27 10:00:00', '2026-07-27 09:30:00', '2026-07-27 09:00:00'),
+(39, 'reset_user_0039_01', '2026-07-28 15:00:00', NULL, '2026-07-28 14:00:00'),
+(40, 'reset_user_0040_01', '2026-07-29 09:00:00', NULL, '2026-07-29 08:00:00'),
+(41, 'reset_user_0041_01', '2026-07-30 12:00:00', '2026-07-30 11:30:00', '2026-07-30 11:00:00'),
+(42, 'reset_user_0042_01', '2026-07-31 17:00:00', NULL, '2026-07-31 16:00:00'),
+(43, 'reset_user_0043_01', '2026-08-01 10:00:00', NULL, '2026-08-01 09:00:00'),
+(44, 'reset_user_0044_01', '2026-08-02 14:00:00', '2026-08-02 13:45:00', '2026-08-02 13:00:00'),
+(45, 'reset_user_0045_01', '2026-08-03 09:00:00', NULL, '2026-08-03 08:00:00'),
+(46, 'reset_user_0046_01', '2026-08-04 16:00:00', NULL, '2026-08-04 15:00:00'),
+(47, 'reset_user_0047_01', '2026-08-05 11:00:00', '2026-08-05 10:30:00', '2026-08-05 10:00:00'),
+(48, 'reset_user_0048_01', '2026-08-06 13:00:00', NULL, '2026-08-06 12:00:00'),
+(49, 'reset_user_0049_01', '2026-08-07 10:00:00', NULL, '2026-08-07 09:00:00'),
+(50, 'reset_user_0050_01', '2026-08-08 15:00:00', '2026-08-08 14:30:00', '2026-08-08 14:00:00');
 
 -- ============================================================
--- 8. EMAIL_VERIFICATIONS (10 entries) – Repeating users (User 2 & 5 have 2 each)
+-- 8. INSERT EMAIL_VERIFICATIONS (50 entries)
 -- ============================================================
 INSERT INTO email_verifications (user_id, token, verified_at, expires_at, created_at) VALUES
--- User 1 (jdoe) – 1 verification
-(1, 'verif_a1b2c3d4e5f6g7h8i9', '2026-06-20 09:30:00', '2026-06-21 09:00:00', '2026-06-20 09:00:00'),
-
--- User 2 (jsmith) – 2 verifications
-(2, 'verif_j0k1l2m3n4o5p6q7r8', NULL, '2026-06-22 14:00:00', '2026-06-21 14:00:00'),
-(2, 'verif_r1s2t3u4v5w6x7y8z9a0', NULL, '2026-06-25 14:00:00', '2026-06-24 14:00:00'),
-
--- User 3 (mjohnson) – 1 verification
-(3, 'verif_s9t0u1v2w3x4y5z6a7', '2026-06-22 08:15:00', '2026-06-23 08:00:00', '2026-06-22 08:00:00'),
-
--- User 4 (swilliams) – 1 verification
-(4, 'verif_b8c9d0e1f2g3h4i5j6', NULL, '2026-06-24 11:00:00', '2026-06-23 11:00:00'),
-
--- User 5 (rbrown) – 2 verifications
-(5, 'verif_k7l8m9n0o1p2q3r4s5', NULL, '2026-06-25 16:00:00', '2026-06-24 16:00:00'),
-(5, 'verif_v1w2x3y4z5a6b7c8d9e0', '2026-06-26 16:00:00', '2026-06-27 16:00:00', '2026-06-26 16:00:00'),
-
--- User 6 (ldavis) – 1 verification
-(6, 'verif_t6u5v4w3x2y1z0a9b8', '2026-06-25 10:20:00', '2026-06-26 10:00:00', '2026-06-25 10:00:00'),
-
--- User 7 (pwilson) – 1 verification
-(7, 'verif_c7d8e9f0g1h2i3j4k5', NULL, '2026-06-27 09:00:00', '2026-06-26 09:00:00'),
-
--- User 8 (mmartinez) – 1 verification
-(8, 'verif_l6m7n8o9p0q1r2s3t4', '2026-06-27 14:30:00', '2026-06-28 14:00:00', '2026-06-27 14:00:00');
+(1, 'verif_user_0001_01', '2026-06-20 09:30:00', '2026-06-21 09:00:00', '2026-06-20 09:00:00'),
+(2, 'verif_user_0002_01', NULL, '2026-06-22 14:00:00', '2026-06-21 14:00:00'),
+(2, 'verif_user_0002_02', NULL, '2026-06-25 14:00:00', '2026-06-24 14:00:00'),
+(3, 'verif_user_0003_01', '2026-06-22 08:15:00', '2026-06-23 08:00:00', '2026-06-22 08:00:00'),
+(4, 'verif_user_0004_01', NULL, '2026-06-24 11:00:00', '2026-06-23 11:00:00'),
+(5, 'verif_user_0005_01', NULL, '2026-06-25 16:00:00', '2026-06-24 16:00:00'),
+(5, 'verif_user_0005_02', '2026-06-26 16:00:00', '2026-06-27 16:00:00', '2026-06-26 16:00:00'),
+(6, 'verif_user_0006_01', '2026-06-25 10:20:00', '2026-06-26 10:00:00', '2026-06-25 10:00:00'),
+(7, 'verif_user_0007_01', NULL, '2026-06-27 09:00:00', '2026-06-26 09:00:00'),
+(8, 'verif_user_0008_01', '2026-06-27 14:30:00', '2026-06-28 14:00:00', '2026-06-27 14:00:00'),
+(9, 'verif_user_0009_01', NULL, '2026-06-29 08:00:00', '2026-06-28 08:00:00'),
+(10, 'verif_user_0010_01', NULL, '2026-06-30 11:00:00', '2026-06-29 11:00:00'),
+(11, 'verif_user_0011_01', '2026-06-30 16:15:00', '2026-07-01 16:00:00', '2026-06-30 16:00:00'),
+(12, 'verif_user_0012_01', NULL, '2026-07-02 09:00:00', '2026-07-01 09:00:00'),
+(13, 'verif_user_0013_01', NULL, '2026-07-03 14:00:00', '2026-07-02 14:00:00'),
+(14, 'verif_user_0014_01', '2026-07-03 08:45:00', '2026-07-04 08:00:00', '2026-07-03 08:00:00'),
+(15, 'verif_user_0015_01', NULL, '2026-07-05 11:00:00', '2026-07-04 11:00:00'),
+(16, 'verif_user_0016_01', NULL, '2026-07-06 16:00:00', '2026-07-05 16:00:00'),
+(17, 'verif_user_0017_01', '2026-07-06 09:10:00', '2026-07-07 09:00:00', '2026-07-06 09:00:00'),
+(18, 'verif_user_0018_01', NULL, '2026-07-08 14:00:00', '2026-07-07 14:00:00'),
+(19, 'verif_user_0019_01', NULL, '2026-07-09 08:00:00', '2026-07-08 08:00:00'),
+(20, 'verif_user_0020_01', '2026-07-09 11:30:00', '2026-07-10 11:00:00', '2026-07-09 11:00:00'),
+(21, 'verif_user_0021_01', NULL, '2026-07-11 10:00:00', '2026-07-10 09:00:00'),
+(22, 'verif_user_0022_01', '2026-07-12 08:30:00', '2026-07-13 08:00:00', '2026-07-12 08:00:00'),
+(23, 'verif_user_0023_01', NULL, '2026-07-14 14:00:00', '2026-07-13 13:00:00'),
+(24, 'verif_user_0024_01', NULL, '2026-07-15 09:00:00', '2026-07-14 08:00:00'),
+(25, 'verif_user_0025_01', '2026-07-16 10:30:00', '2026-07-17 10:00:00', '2026-07-16 10:00:00'),
+(26, 'verif_user_0026_01', NULL, '2026-07-18 15:00:00', '2026-07-17 14:00:00'),
+(27, 'verif_user_0027_01', NULL, '2026-07-19 11:00:00', '2026-07-18 10:00:00'),
+(28, 'verif_user_0028_01', '2026-07-20 09:45:00', '2026-07-21 09:00:00', '2026-07-20 09:00:00'),
+(29, 'verif_user_0029_01', NULL, '2026-07-22 16:00:00', '2026-07-21 15:00:00'),
+(30, 'verif_user_0030_01', NULL, '2026-07-23 12:00:00', '2026-07-22 11:00:00'),
+(31, 'verif_user_0031_01', '2026-07-24 08:15:00', '2026-07-25 08:00:00', '2026-07-24 08:00:00'),
+(32, 'verif_user_0032_01', NULL, '2026-07-26 13:00:00', '2026-07-25 12:00:00'),
+(33, 'verif_user_0033_01', NULL, '2026-07-27 10:00:00', '2026-07-26 09:00:00'),
+(34, 'verif_user_0034_01', '2026-07-28 14:30:00', '2026-07-29 14:00:00', '2026-07-28 14:00:00'),
+(35, 'verif_user_0035_01', NULL, '2026-07-30 09:00:00', '2026-07-29 08:00:00'),
+(36, 'verif_user_0036_01', NULL, '2026-07-31 17:00:00', '2026-07-30 16:00:00'),
+(37, 'verif_user_0037_01', '2026-08-01 11:30:00', '2026-08-02 11:00:00', '2026-08-01 11:00:00'),
+(38, 'verif_user_0038_01', NULL, '2026-08-03 10:00:00', '2026-08-02 09:00:00'),
+(39, 'verif_user_0039_01', NULL, '2026-08-04 15:00:00', '2026-08-03 14:00:00'),
+(40, 'verif_user_0040_01', '2026-08-05 09:00:00', '2026-08-06 08:00:00', '2026-08-05 08:00:00'),
+(41, 'verif_user_0041_01', NULL, '2026-08-07 12:00:00', '2026-08-06 11:00:00'),
+(42, 'verif_user_0042_01', NULL, '2026-08-08 16:00:00', '2026-08-07 15:00:00'),
+(43, 'verif_user_0043_01', '2026-08-09 13:30:00', '2026-08-10 13:00:00', '2026-08-09 13:00:00'),
+(44, 'verif_user_0044_01', NULL, '2026-08-11 09:00:00', '2026-08-10 08:00:00'),
+(45, 'verif_user_0045_01', NULL, '2026-08-12 14:00:00', '2026-08-11 13:00:00'),
+(46, 'verif_user_0046_01', '2026-08-13 10:30:00', '2026-08-14 10:00:00', '2026-08-13 10:00:00'),
+(47, 'verif_user_0047_01', NULL, '2026-08-15 11:00:00', '2026-08-14 10:00:00'),
+(48, 'verif_user_0048_01', NULL, '2026-08-16 17:00:00', '2026-08-15 16:00:00'),
+(49, 'verif_user_0049_01', '2026-08-17 08:45:00', '2026-08-18 08:00:00', '2026-08-17 08:00:00'),
+(50, 'verif_user_0050_01', NULL, '2026-08-19 12:00:00', '2026-08-18 11:00:00');
 
 -- ============================================================
--- 9. AUDIT_LOGS (10 entries) – Repeating LOGINs (User 1, 2, 3)
+-- 9. INSERT AUDIT_LOGS (50 entries)
 -- ============================================================
 INSERT INTO audit_logs (user_id, action, table_name, record_id, old_values, new_values, ip_address, user_agent, created_at) VALUES
--- LOGIN actions (6 entries – repeating)
-(1, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.100', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', '2026-06-20 09:30:00'),
-(1, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.100', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', '2026-06-22 08:00:00'),
-
-(2, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.101', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36', '2026-06-21 11:20:00'),
-(2, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.101', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36', '2026-06-24 13:10:00'),
-
-(3, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.102', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15', '2026-06-24 09:00:00'),
-(3, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.102', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15', '2026-06-24 18:30:00'),
-
--- UPDATE actions (2 entries)
-(4, 'UPDATE', 'users', 2, '{"phone_number": "09171234568"}', '{"phone_number": "09171234599"}', '192.168.1.103', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', '2026-06-23 10:30:00'),
-(6, 'UPDATE', 'users', 3, '{"status": "active"}', '{"status": "suspended"}', '192.168.1.105', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', '2026-06-24 16:00:00'),
-
--- CREATE action (1 entry)
-(1, 'CREATE', 'users', 11, NULL, '{"first_name": "Chris", "last_name": "Anderson"}', '192.168.1.100', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', '2026-06-22 08:00:00'),
-
--- DELETE action (1 entry)
-(3, 'DELETE', 'sessions', 5, '{"session_id": 5, "user_id": 5}', NULL, '192.168.1.102', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15', '2026-06-23 11:20:00');
+(1, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-20 09:30:00'),
+(1, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-22 08:00:00'),
+(1, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-26 09:00:00'),
+(2, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.101', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-21 11:20:00'),
+(2, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.101', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-24 13:10:00'),
+(2, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.101', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-26 14:00:00'),
+(3, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.102', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-24 09:00:00'),
+(3, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.102', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-24 18:30:00'),
+(4, 'UPDATE', 'users', 2, '{"phone": "09171234568"}', '{"phone": "09171234599"}', '192.168.1.103', 'Mozilla/5.0 (Firefox/89.0)', '2026-06-23 10:30:00'),
+(6, 'UPDATE', 'users', 3, '{"status": "active"}', '{"status": "suspended"}', '192.168.1.105', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-24 16:00:00'),
+(1, 'CREATE', 'users', 11, NULL, '{"first_name": "Chris"}', '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-22 08:00:00'),
+(3, 'DELETE', 'sessions', 5, '{"session_id":5}', NULL, '192.168.1.102', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-23 11:20:00'),
+(4, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.103', 'Mozilla/5.0 (Firefox/89.0)', '2026-06-26 11:30:00'),
+(6, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.105', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-26 15:00:00'),
+(10, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.109', 'Mozilla/5.0 (Android) AppleWebKit/537.36', '2026-06-26 10:00:00'),
+(7, 'UPDATE', 'roles', 2, '{"role_name": "Manager"}', '{"role_name": "Senior Manager"}', '192.168.1.106', 'Mozilla/5.0 (Macintosh) AppleWebKit/605.1.15', '2026-06-25 10:00:00'),
+(8, 'UPDATE', 'system_settings', 1, '{"value": "false"}', '{"value": "true"}', '192.168.1.107', 'Mozilla/5.0 (Firefox/90.0)', '2026-06-26 14:00:00'),
+(1, 'LOGOUT', NULL, NULL, NULL, NULL, '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-25 08:00:00'),
+(1, 'LOGOUT', NULL, NULL, NULL, NULL, '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-30 09:00:00'),
+(11, 'UPDATE', 'users', 15, '{"status": "active"}', '{"status": "suspended"}', '192.168.1.110', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-28 09:00:00'),
+(1, 'DELETE', 'user_roles', 5, '{"user_id":5}', NULL, '192.168.1.100', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-28 10:00:00'),
+(3, 'UPDATE', 'roles', 3, '{"desc": "Standard"}', '{"desc": "Default employee"}', '192.168.1.102', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-06-29 09:00:00'),
+(18, 'UPDATE', 'permissions', 5, '{"desc": "view roles"}', '{"desc": "view and audit roles"}', '192.168.1.117', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-06-30 14:00:00'),
+(14, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.113', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-28 11:00:00'),
+(16, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.115', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-06-29 14:00:00'),
+(20, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.119', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-01 09:00:00'),
+(25, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.124', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-02 08:00:00'),
+(26, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.125', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-07-02 09:00:00'),
+(27, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.126', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-07-02 10:00:00'),
+(28, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.127', 'Mozilla/5.0 (Firefox/89.0)', '2026-07-02 11:00:00'),
+(29, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.128', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-07-02 12:00:00'),
+(30, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.129', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-02 13:00:00'),
+(31, 'UPDATE', 'users', 1, '{"phone": "09171234567"}', '{"phone": "09171234599"}', '192.168.1.130', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-07-02 14:00:00'),
+(32, 'UPDATE', 'roles', 4, '{"role_name": "HR Specialist"}', '{"role_name": "HR Manager"}', '192.168.1.131', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-02 15:00:00'),
+(33, 'UPDATE', 'permissions', 3, '{"desc": "edit users"}', '{"desc": "edit users & preferences"}', '192.168.1.132', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-07-02 16:00:00'),
+(34, 'UPDATE', 'system_settings', 2, '{"value": "false"}', '{"value": "true"}', '192.168.1.133', 'Mozilla/5.0 (Firefox/89.0)', '2026-07-02 17:00:00'),
+(35, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.134', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-07-02 18:00:00'),
+(36, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.135', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-02 19:00:00'),
+(37, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.136', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-07-02 20:00:00'),
+(38, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.137', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-02 21:00:00'),
+(39, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.138', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-07-02 22:00:00'),
+(40, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.139', 'Mozilla/5.0 (Firefox/89.0)', '2026-07-02 23:00:00'),
+(41, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.140', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-07-03 00:00:00'),
+(42, 'UPDATE', 'users', 5, '{"status": "suspended"}', '{"status": "active"}', '192.168.1.141', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-03 01:00:00'),
+(43, 'UPDATE', 'roles', 6, '{"role_name": "IT Support"}', '{"role_name": "IT Support Specialist"}', '192.168.1.142', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-07-03 02:00:00'),
+(44, 'UPDATE', 'permissions', 8, '{"desc": "export reports"}', '{"desc": "export CSV & PDF"}', '192.168.1.143', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-03 03:00:00'),
+(45, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.144', 'Mozilla/5.0 (iPhone) AppleWebKit/605.1.15', '2026-07-03 04:00:00'),
+(46, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.145', 'Mozilla/5.0 (Firefox/89.0)', '2026-07-03 05:00:00'),
+(47, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.146', 'Mozilla/5.0 (Linux) AppleWebKit/537.36', '2026-07-03 06:00:00'),
+(48, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.147', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-03 07:00:00'),
+(49, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.148', 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', '2026-07-03 08:00:00'),
+(50, 'LOGIN', NULL, NULL, NULL, NULL, '192.168.1.149', 'Mozilla/5.0 (Windows) AppleWebKit/537.36', '2026-07-03 09:00:00');
 
 -- ============================================================
--- 10. SYSTEM_SETTINGS (10 entries) – Diverse Categories
+-- 10. INSERT SYSTEM_SETTINGS (50 entries)
 -- ============================================================
 INSERT INTO system_settings (setting_key, setting_value, category, description, updated_at) VALUES
-('site_name', 'Acme Employee Directory', 'general', 'The name of the application', '2026-06-20 09:00:00'),
-('maintenance_mode', 'false', 'general', 'Enable/disable maintenance mode (true/false)', '2026-06-20 09:00:00'),
-('max_login_attempts', '5', 'security', 'Maximum number of failed login attempts before lockout', '2026-06-21 09:00:00'),
-('session_timeout_minutes', '60', 'security', 'Session expiry time in minutes', '2026-06-21 09:00:00'),
-('password_min_length', '8', 'security', 'Minimum required password length', '2026-06-22 09:00:00'),
-('require_special_chars', 'true', 'security', 'Require special characters in passwords', '2026-06-22 09:00:00'),
-('smtp_host', 'smtp.gmail.com', 'email', 'SMTP server hostname for outgoing emails', '2026-06-23 09:00:00'),
-('smtp_port', '587', 'email', 'SMTP server port number', '2026-06-23 09:00:00'),
-('sender_email', 'noreply@company.com', 'email', 'Default sender email address', '2026-06-24 09:00:00'),
-('max_upload_size_mb', '10', 'storage', 'Maximum file upload size in megabytes', '2026-06-24 09:00:00');
+('site_name', 'Acme Employee Directory', 'general', 'Application name', '2026-06-20 09:00:00'),
+('maintenance_mode', 'false', 'general', 'Maintenance mode toggle', '2026-06-20 09:00:00'),
+('max_login_attempts', '5', 'security', 'Failed attempts before lockout', '2026-06-21 09:00:00'),
+('session_timeout_minutes', '60', 'security', 'Session expiry time', '2026-06-21 09:00:00'),
+('password_min_length', '8', 'security', 'Minimum password length', '2026-06-22 09:00:00'),
+('require_special_chars', 'true', 'security', 'Special chars required in passwords', '2026-06-22 09:00:00'),
+('smtp_host', 'smtp.gmail.com', 'email', 'SMTP server host', '2026-06-23 09:00:00'),
+('smtp_port', '587', 'email', 'SMTP server port', '2026-06-23 09:00:00'),
+('sender_email', 'noreply@company.com', 'email', 'Default sender address', '2026-06-24 09:00:00'),
+('max_upload_size_mb', '10', 'storage', 'Max file upload size', '2026-06-24 09:00:00'),
+('enable_audit_logging', 'true', 'security', 'Enable audit logging', '2026-06-25 09:00:00'),
+('data_retention_days', '365', 'general', 'Retention period for logs', '2026-06-25 09:00:00'),
+('default_language', 'en-US', 'locale', 'Default UI language', '2026-06-26 09:00:00'),
+('timezone', 'Asia/Manila', 'locale', 'System timezone', '2026-06-26 09:00:00'),
+('date_format', 'YYYY-MM-DD', 'locale', 'Default date display format', '2026-06-27 09:00:00'),
+('enable_2fa', 'true', 'security', 'Two-factor authentication toggle', '2026-06-27 09:00:00'),
+('notification_emails_enabled', 'true', 'notifications', 'Email notifications toggle', '2026-06-28 09:00:00'),
+('daily_report_time', '17:00:00', 'notifications', 'Daily report send time', '2026-06-28 09:00:00'),
+('password_expiry_days', '90', 'security', 'Password validity period', '2026-06-29 09:00:00'),
+('maintenance_window_start', '02:00:00', 'general', 'Maintenance window start time', '2026-06-29 09:00:00'),
+('company_name', 'Acme Corporation', 'general', 'Company name', '2026-06-30 09:00:00'),
+('company_address', '123 Main Street, NY', 'general', 'Company physical address', '2026-06-30 09:00:00'),
+('company_phone', '+1-555-123-4567', 'general', 'Company phone number', '2026-06-30 09:00:00'),
+('support_email', 'support@company.com', 'email', 'Support team email', '2026-07-01 09:00:00'),
+('hr_email', 'hr@company.com', 'email', 'HR department email', '2026-07-01 09:00:00'),
+('payroll_email', 'payroll@company.com', 'email', 'Payroll department email', '2026-07-01 09:00:00'),
+('it_email', 'it@company.com', 'email', 'IT support email', '2026-07-02 09:00:00'),
+('security_email', 'security@company.com', 'security', 'Security team email', '2026-07-02 09:00:00'),
+('audit_email', 'audit@company.com', 'audit', 'Audit team email', '2026-07-02 09:00:00'),
+('backup_schedule', 'daily', 'storage', 'Backup frequency', '2026-07-03 09:00:00'),
+('backup_retention_days', '30', 'storage', 'Backup retention period', '2026-07-03 09:00:00'),
+('max_file_size_mb', '25', 'storage', 'Maximum file size for uploads', '2026-07-03 09:00:00'),
+('allowed_file_types', 'jpg,png,pdf,doc,docx,xls,xlsx', 'storage', 'Allowed file extensions', '2026-07-04 09:00:00'),
+('log_retention_days', '90', 'audit', 'Audit log retention period', '2026-07-04 09:00:00'),
+('session_idle_timeout', '30', 'security', 'Session idle timeout in minutes', '2026-07-04 09:00:00'),
+('password_reuse_limit', '5', 'security', 'Prevent password reuse count', '2026-07-05 09:00:00'),
+('lockout_duration_minutes', '15', 'security', 'Account lockout duration', '2026-07-05 09:00:00'),
+('enable_captcha', 'true', 'security', 'CAPTCHA on login page', '2026-07-05 09:00:00'),
+('captcha_site_key', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', 'security', 'CAPTCHA site key', '2026-07-06 09:00:00'),
+('captcha_secret_key', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe', 'security', 'CAPTCHA secret key', '2026-07-06 09:00:00'),
+('default_role', '3', 'security', 'Default role for new users', '2026-07-06 09:00:00'),
+('allow_registration', 'true', 'general', 'Allow self-registration', '2026-07-07 09:00:00'),
+('registration_requires_approval', 'true', 'general', 'Admin approval required for new users', '2026-07-07 09:00:00'),
+('email_verification_required', 'true', 'email', 'Require email verification before login', '2026-07-07 09:00:00'),
+('email_verification_expiry_hours', '24', 'email', 'Verification token expiry in hours', '2026-07-08 09:00:00'),
+('password_reset_expiry_hours', '1', 'security', 'Reset token expiry in hours', '2026-07-08 09:00:00'),
+('password_reset_enabled', 'true', 'security', 'Enable password reset functionality', '2026-07-08 09:00:00'),
+('enable_user_self_edit', 'true', 'general', 'Allow users to edit own profiles', '2026-07-09 09:00:00'),
+('enable_user_self_delete', 'false', 'general', 'Allow users to delete own accounts', '2026-07-09 09:00:00'),
+('enable_employee_directory', 'true', 'general', 'Enable public employee directory', '2026-07-09 09:00:00');
