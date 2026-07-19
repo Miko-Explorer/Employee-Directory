@@ -9,7 +9,7 @@ def get_connection():
         user=config["user"],
         password=config["password"],
         database=config["database"],
-        port=config.get("port", 3306),
+        port=int(config.get("port", 3306))
     )
 
 def run_query(query, params=None, fetch=True):
