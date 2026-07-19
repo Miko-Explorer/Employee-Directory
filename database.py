@@ -4,12 +4,20 @@ from mysql.connector import Error
 
 def get_connection():
     config = st.secrets["mysql"]
+    raw_port = config.get("port")
+    if raw_port is None or str(raw_port).strip() == "":
+        port = 3306
+    else:
+        try:
+            port = int(raw_port)
+        except (ValueError, TypeError):
+            port = 3306
     return mysql.connector.connect(
         host=config["host"],
         user=config["user"],
         password=config["password"],
         database=config["database"],
-        port=int(config.get("port", 3306))
+        port=port
     )
 
 def run_query(query, params=None, fetch=True):
