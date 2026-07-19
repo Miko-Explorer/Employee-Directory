@@ -26,15 +26,15 @@
 
 ## Features
 
-- **User management** — create, edit, soft-delete, and restore employee accounts with salted password hashing.
-- **Role-based access control (RBAC)** — define roles and permissions, assign roles to users, map permissions to roles.
-- **Session tracking** — monitor active/expired sessions per user with IP and user agent details.
-- **Password reset & email verification** — generate and validate tokens with configurable expiry windows.
-- **Audit logging** — record every CREATE, UPDATE, DELETE, and LOGIN action with old/new JSON values.
-- **System settings** — store key-value application settings grouped by category (general, security, email, storage).
-- **26 pre-built SQL views** — user demographics, session metrics, role distribution, audit analytics, and combined analysis.
-- **Dashboard** — 5 essential KPIs (Total Users, Active Roles, Permissions, Active Sessions, Events Today) with two interactive bar charts.
-- **Dark navy theme** — animated gradient background, frosted-glass headers, styled tables with alternating rows, and a custom SVG logo.
+- **User management** — create, edit, soft-delete, restore employees with salted password hashing
+- **Role-based access control (RBAC)** — define roles and permissions, assign roles to users, map permissions to roles
+- **Session tracking** — monitor active/expired sessions per user with IP and user agent details
+- **Password reset & email verification** — generate and validate tokens with configurable expiry windows
+- **Audit logging** — record every CREATE, UPDATE, DELETE, and LOGIN action with old/new JSON values
+- **System settings** — key-value application settings grouped by category (general, security, email, storage)
+- **26 pre-built SQL views** — user demographics, session metrics, role distribution, audit analytics, and combined analysis
+- **Dashboard** — 5 essential KPIs (Total Users, Active Roles, Permissions, Active Sessions, Events Today) with two bar charts
+- **Dark navy theme** — animated gradient background, frosted-glass headers, styled tables with alternating rows, custom SVG logo
 
 ---
 
@@ -358,12 +358,12 @@ Employee Directory/
 
 ## UI / UX
 
-- **Dark navy theme** — animated gradient background (`#1d243c`, `#252d4a`, `#2a314e`), frosted-glass headers, solid metric cards with subtle shadows.
-- **Color palette** — `#1d243c` (background/sidebar), `#2a314e` (cards/inputs), `#5a5f7a` (borders/buttons), `#898da5` (muted text/charts), `#e7e9fb` (primary text).
-- **Sidebar** — `#1d243c` backdrop, centered "Directory" SVG logo with gradient, hidden-label radio nav across 12 pages.
-- **Tables** — alternating row backgrounds (`#2a314e` / `#252d4a`), `#1d243c` header with uppercase white text, hover highlight.
-- **Interactions** — slate button hover glow, `st.rerun()` on CRUD mutations for instant refresh, toast messages for success/error/info.
-- **Dashboard** — 5 solid-metric KPIs in a single row, two side-by-side bar charts (user status distribution, users per role), recent audit log table.
+- **Dark navy theme** — animated gradient background (`#1d243c`, `#252d4a`, `#2a314e`), frosted-glass headers, solid metric cards with subtle shadows
+- **Color palette** — `#1d243c` (background/sidebar), `#2a314e` (cards/inputs), `#5a5f7a` (borders/buttons), `#898da5` (muted text/charts), `#e7e9fb` (primary text)
+- **Sidebar** — `#1d243c` backdrop, centered "Directory" SVG logo with gradient, hidden-label radio nav across 12 pages
+- **Tables** — alternating row backgrounds (`#2a314e` / `#252d4a`), `#1d243c` header with uppercase white text, hover highlight
+- **Interactions** — slate button hover glow, `st.rerun()` on CRUD mutations for instant refresh, toast messages for success/error/info
+- **Dashboard** — 5 solid-metric KPIs in a single row, two side-by-side bar charts (user status distribution, users per role), recent audit log table
 
 ---
 
@@ -403,4 +403,4 @@ Include your chosen license here (e.g., MIT).
 
 ## Contact
 
-Maintained by **Miko-Explorer** — open an issue on [GitHub](https://github.com/Miko-Explorer/Employee-Directory).
+Maintained by **Miko-Explorer** — open an issue on [GitHub]([https://github.com/Miko-Explorer/Employee-Directory](https://github.com/Miko-Explorer/Employee-Directory)).
