@@ -403,4 +403,4 @@ Include your chosen license here (e.g., MIT).
 
 ## Contact
 
-Maintained by **Miko-Explorer** — open an issue on [GitHub]([https://github.com/Miko-Explorer/Employee-Directory](https://github.com/Miko-Explorer/Employee-Directory)]).
+Maintained by **Miko-Explorer** — open an issue on [GitHub](https://github.com/Miko-Explorer/Employee-Directory](https://github.com/Miko-Explorer/Employee-Directory)).
